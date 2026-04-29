@@ -1,0 +1,976 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>AeroGuard-EP Research Methodology Presentation</title>
+  <meta name="description" content="Final evaluation presentation for AeroGuard-EP research methodology and publication.">
+  <style>
+    :root {
+      color-scheme: dark;
+      --bg: #071013;
+      --panel: #111b20;
+      --panel-2: #17262d;
+      --ink: #f3fbf8;
+      --muted: #aec3bf;
+      --line: rgba(243, 251, 248, 0.14);
+      --accent: #2ee6a6;
+      --accent-2: #7bd7ff;
+      --warning: #ffd166;
+      --danger: #ff6b6b;
+      --deep: #0a161a;
+      --shadow: 0 22px 80px rgba(0, 0, 0, 0.35);
+    }
+
+    * { box-sizing: border-box; }
+
+    html, body {
+      margin: 0;
+      min-height: 100%;
+      background:
+        radial-gradient(circle at 20% 10%, rgba(46, 230, 166, 0.16), transparent 28%),
+        radial-gradient(circle at 85% 18%, rgba(123, 215, 255, 0.14), transparent 30%),
+        linear-gradient(135deg, #061012 0%, #10272d 48%, #071013 100%);
+      color: var(--ink);
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      overflow: hidden;
+    }
+
+    a { color: inherit; }
+
+    .deck {
+      position: relative;
+      width: 100vw;
+      height: 100vh;
+      overflow: hidden;
+    }
+
+    .slide {
+      position: absolute;
+      inset: 0;
+      display: grid;
+      grid-template-rows: auto 1fr auto;
+      gap: 22px;
+      padding: clamp(24px, 4vw, 54px);
+      opacity: 0;
+      transform: translateX(40px) scale(0.985);
+      pointer-events: none;
+      transition: opacity 360ms ease, transform 360ms ease;
+    }
+
+    .slide.active {
+      opacity: 1;
+      transform: translateX(0) scale(1);
+      pointer-events: auto;
+    }
+
+    .slide header,
+    .slide footer {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 18px;
+      color: var(--muted);
+      font-size: clamp(12px, 1.1vw, 15px);
+      letter-spacing: 0;
+    }
+
+    .brand {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      font-weight: 800;
+      color: var(--ink);
+    }
+
+    .brand-mark {
+      width: 32px;
+      height: 32px;
+      border: 1px solid rgba(46, 230, 166, 0.35);
+      border-radius: 8px;
+      display: grid;
+      place-items: center;
+      background: linear-gradient(135deg, rgba(46, 230, 166, 0.18), rgba(123, 215, 255, 0.16));
+      box-shadow: 0 0 28px rgba(46, 230, 166, 0.16);
+    }
+
+    .brand-mark::before {
+      content: "";
+      width: 14px;
+      height: 14px;
+      border-radius: 50%;
+      border: 2px solid var(--accent);
+      box-shadow: 16px 0 0 -5px var(--accent-2), -16px 0 0 -5px var(--warning);
+    }
+
+    .content {
+      min-height: 0;
+      display: grid;
+      align-items: center;
+      gap: clamp(18px, 2.5vw, 30px);
+    }
+
+    .two-col {
+      grid-template-columns: minmax(0, 1.03fr) minmax(280px, 0.97fr);
+    }
+
+    .three-col {
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+
+    h1, h2, h3, p { margin: 0; }
+
+    h1 {
+      max-width: 1080px;
+      font-size: clamp(42px, 6.6vw, 92px);
+      line-height: 0.96;
+      letter-spacing: 0;
+    }
+
+    h2 {
+      font-size: clamp(32px, 5vw, 68px);
+      line-height: 1;
+      letter-spacing: 0;
+    }
+
+    h3 {
+      font-size: clamp(20px, 2vw, 30px);
+      line-height: 1.12;
+      letter-spacing: 0;
+    }
+
+    .lead {
+      color: var(--muted);
+      max-width: 960px;
+      font-size: clamp(18px, 2vw, 27px);
+      line-height: 1.42;
+    }
+
+    .kicker {
+      color: var(--accent);
+      text-transform: uppercase;
+      font-weight: 800;
+      font-size: 13px;
+      letter-spacing: 0.08em;
+      margin-bottom: 14px;
+    }
+
+    .panel {
+      background: linear-gradient(180deg, rgba(23, 38, 45, 0.92), rgba(11, 22, 26, 0.9));
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      box-shadow: var(--shadow);
+      padding: clamp(18px, 2.2vw, 30px);
+    }
+
+    .compact-panel {
+      padding: 18px;
+      border-radius: 8px;
+      border: 1px solid var(--line);
+      background: rgba(17, 27, 32, 0.76);
+    }
+
+    .stack { display: grid; gap: 16px; }
+    .tight { display: grid; gap: 10px; }
+
+    .meta-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 12px;
+    }
+
+    .meta {
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      padding: 14px;
+      background: rgba(255, 255, 255, 0.035);
+      min-height: 92px;
+    }
+
+    .label {
+      display: block;
+      color: var(--muted);
+      font-size: 12px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      margin-bottom: 8px;
+    }
+
+    .value {
+      font-size: clamp(16px, 1.5vw, 21px);
+      line-height: 1.25;
+      font-weight: 750;
+    }
+
+    .tag-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+
+    .tag {
+      border: 1px solid rgba(123, 215, 255, 0.32);
+      background: rgba(123, 215, 255, 0.08);
+      color: #d9f5ff;
+      border-radius: 999px;
+      padding: 7px 10px;
+      font-size: 13px;
+      font-weight: 700;
+      white-space: nowrap;
+    }
+
+    ul {
+      margin: 0;
+      padding: 0;
+      list-style: none;
+      display: grid;
+      gap: 12px;
+    }
+
+    li {
+      position: relative;
+      color: var(--ink);
+      font-size: clamp(18px, 1.7vw, 25px);
+      line-height: 1.32;
+      padding-left: 26px;
+    }
+
+    li::before {
+      content: "";
+      position: absolute;
+      left: 0;
+      top: 0.55em;
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      background: var(--accent);
+      box-shadow: 0 0 20px rgba(46, 230, 166, 0.45);
+    }
+
+    .small-list li {
+      font-size: clamp(15px, 1.35vw, 19px);
+      color: #dce9e6;
+    }
+
+    .timeline {
+      display: grid;
+      grid-template-columns: repeat(5, minmax(0, 1fr));
+      gap: 12px;
+    }
+
+    .step {
+      min-height: 180px;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      padding: 16px;
+      background: rgba(255, 255, 255, 0.035);
+      display: grid;
+      align-content: start;
+      gap: 12px;
+    }
+
+    .step b {
+      color: var(--accent-2);
+      font-size: 13px;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+    }
+
+    .step span {
+      color: var(--muted);
+      font-size: clamp(14px, 1.25vw, 18px);
+      line-height: 1.35;
+    }
+
+    .architecture {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 14px;
+    }
+
+    .layer {
+      position: relative;
+      min-height: 250px;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      padding: 18px;
+      background:
+        linear-gradient(180deg, rgba(255,255,255,0.05), rgba(255,255,255,0.015)),
+        var(--panel);
+      overflow: hidden;
+    }
+
+    .layer::after {
+      content: "";
+      position: absolute;
+      inset: auto -20% -30% -20%;
+      height: 100px;
+      background: linear-gradient(90deg, transparent, rgba(46, 230, 166, 0.2), transparent);
+      transform: rotate(-8deg);
+    }
+
+    .layer-number {
+      color: var(--warning);
+      font-weight: 900;
+      font-size: 15px;
+      margin-bottom: 18px;
+      display: block;
+    }
+
+    .layer p,
+    .compact-panel p,
+    .step p,
+    .metric p {
+      color: var(--muted);
+      font-size: clamp(14px, 1.3vw, 18px);
+      line-height: 1.42;
+    }
+
+    .equation {
+      border: 1px solid rgba(46, 230, 166, 0.25);
+      background: rgba(46, 230, 166, 0.06);
+      border-radius: 8px;
+      padding: 20px;
+      font-family: "SFMono-Regular", Consolas, "Liberation Mono", monospace;
+      font-size: clamp(18px, 2.1vw, 30px);
+      color: #d9fff3;
+      text-align: center;
+    }
+
+    .flow {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 12px;
+    }
+
+    .flow-card {
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: rgba(17, 27, 32, 0.82);
+      padding: 18px;
+      min-height: 190px;
+      display: grid;
+      gap: 10px;
+      align-content: start;
+    }
+
+    .flow-card strong {
+      color: var(--accent);
+      font-size: clamp(17px, 1.6vw, 23px);
+      line-height: 1.1;
+    }
+
+    .metrics {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 14px;
+    }
+
+    .metric {
+      min-height: 174px;
+      border-radius: 8px;
+      padding: 18px;
+      border: 1px solid var(--line);
+      background: linear-gradient(180deg, rgba(46, 230, 166, 0.09), rgba(123, 215, 255, 0.035));
+    }
+
+    .metric .number {
+      display: block;
+      color: var(--accent);
+      font-size: clamp(34px, 4vw, 62px);
+      line-height: 1;
+      font-weight: 900;
+      margin-bottom: 12px;
+    }
+
+    .compare {
+      display: grid;
+      gap: 12px;
+    }
+
+    .bar {
+      display: grid;
+      grid-template-columns: 220px 1fr 80px;
+      align-items: center;
+      gap: 12px;
+      color: var(--muted);
+      font-size: 15px;
+    }
+
+    .track {
+      height: 14px;
+      border-radius: 999px;
+      background: rgba(255, 255, 255, 0.08);
+      overflow: hidden;
+    }
+
+    .fill {
+      height: 100%;
+      border-radius: inherit;
+      background: linear-gradient(90deg, var(--accent), var(--accent-2));
+    }
+
+    .network {
+      position: relative;
+      min-height: 440px;
+      border-radius: 8px;
+      border: 1px solid var(--line);
+      background:
+        linear-gradient(rgba(255,255,255,0.035) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255,255,255,0.035) 1px, transparent 1px),
+        rgba(7, 16, 19, 0.72);
+      background-size: 44px 44px;
+      overflow: hidden;
+    }
+
+    .node {
+      position: absolute;
+      width: 22px;
+      height: 22px;
+      border-radius: 50%;
+      background: var(--accent-2);
+      box-shadow: 0 0 26px rgba(123, 215, 255, 0.42);
+    }
+
+    .node.bad {
+      width: 34px;
+      height: 34px;
+      background: var(--danger);
+      box-shadow: 0 0 40px rgba(255, 107, 107, 0.55);
+      animation: pulse 1.4s ease-in-out infinite;
+    }
+
+    .node.guard {
+      width: 28px;
+      height: 28px;
+      background: var(--accent);
+      box-shadow: 0 0 44px rgba(46, 230, 166, 0.5);
+    }
+
+    .link {
+      position: absolute;
+      height: 2px;
+      transform-origin: left center;
+      background: linear-gradient(90deg, rgba(255,255,255,0.1), rgba(123,215,255,0.42));
+    }
+
+    @keyframes pulse {
+      0%, 100% { transform: scale(1); }
+      50% { transform: scale(1.18); }
+    }
+
+    .source-links {
+      display: grid;
+      gap: 9px;
+      font-size: clamp(14px, 1.2vw, 18px);
+      color: var(--muted);
+    }
+
+    .source-links a {
+      color: #d9f5ff;
+      text-decoration: none;
+      border-bottom: 1px solid rgba(123, 215, 255, 0.35);
+    }
+
+    .controls {
+      position: fixed;
+      right: 20px;
+      bottom: 18px;
+      z-index: 20;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      padding: 8px;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: rgba(7, 16, 19, 0.82);
+      backdrop-filter: blur(12px);
+    }
+
+    button {
+      width: 40px;
+      height: 36px;
+      border: 1px solid rgba(255, 255, 255, 0.16);
+      border-radius: 8px;
+      background: rgba(255, 255, 255, 0.06);
+      color: var(--ink);
+      font: inherit;
+      cursor: pointer;
+    }
+
+    button:hover { border-color: rgba(46, 230, 166, 0.55); }
+
+    .counter {
+      min-width: 74px;
+      text-align: center;
+      color: var(--muted);
+      font-size: 13px;
+      font-weight: 800;
+    }
+
+    .progress {
+      position: fixed;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      z-index: 25;
+      height: 4px;
+      background: rgba(255, 255, 255, 0.08);
+    }
+
+    .progress span {
+      display: block;
+      height: 100%;
+      width: 0%;
+      background: linear-gradient(90deg, var(--accent), var(--accent-2), var(--warning));
+      transition: width 220ms ease;
+    }
+
+    .print-note {
+      display: none;
+    }
+
+    @media (max-width: 920px) {
+      body { overflow: auto; }
+      .deck { height: auto; overflow: visible; }
+      .slide {
+        position: relative;
+        min-height: 100vh;
+        opacity: 1;
+        transform: none;
+        pointer-events: auto;
+        display: grid;
+      }
+      .slide:not(.active) { display: none; }
+      .two-col, .three-col, .architecture, .flow, .metrics, .timeline {
+        grid-template-columns: 1fr;
+      }
+      .meta-grid { grid-template-columns: 1fr; }
+      .network { min-height: 300px; }
+      .bar { grid-template-columns: 1fr; }
+      .controls { left: 14px; right: 14px; justify-content: center; }
+    }
+
+    @media print {
+      html, body {
+        background: #fff;
+        color: #111;
+        overflow: visible;
+      }
+      .deck { height: auto; overflow: visible; }
+      .slide {
+        position: relative;
+        min-height: 100vh;
+        opacity: 1 !important;
+        transform: none !important;
+        page-break-after: always;
+        color: #111;
+        background: #fff;
+      }
+      .panel, .compact-panel, .layer, .flow-card, .metric, .step, .meta, .network {
+        box-shadow: none;
+        background: #fff;
+        border-color: #c9d4d1;
+      }
+      .slide header, .slide footer, .lead, .layer p, .metric p, .compact-panel p, .step span, .source-links {
+        color: #2f4642;
+      }
+      .controls, .progress { display: none; }
+      .print-note { display: block; }
+    }
+  </style>
+</head>
+<body>
+  <main class="deck" aria-live="polite">
+    <section class="slide active">
+      <header>
+        <span class="brand"><span class="brand-mark"></span>AeroGuard-EP</span>
+        <span>Final Evaluation | Research Methodology</span>
+      </header>
+      <div class="content two-col">
+        <div class="stack">
+          <div class="kicker">Published research presentation</div>
+          <h1>AeroGuard-EP</h1>
+          <p class="lead">An integrated stochastic multi-agent protocol for cross-platform information resilience and algorithmic circuit breaking.</p>
+          <div class="tag-row">
+            <span class="tag">Multi-Agent Systems</span>
+            <span class="tag">Misinformation Control</span>
+            <span class="tag">SDE Stiffness Modeling</span>
+            <span class="tag">Federated Learning</span>
+          </div>
+        </div>
+        <div class="panel stack">
+          <h3>Presented by</h3>
+          <div class="meta-grid">
+            <div class="meta"><span class="label">Student</span><span class="value">Karthik S Gowda<br>23BCAR0258</span></div>
+            <div class="meta"><span class="label">Student</span><span class="value">Rohith R<br>23BCAR0270</span></div>
+            <div class="meta"><span class="label">Student</span><span class="value">Vipul Mahesh<br>23BCAR0596</span></div>
+            <div class="meta"><span class="label">Guide</span><span class="value">Mr. Diwakara Vasuman</span></div>
+          </div>
+        </div>
+      </div>
+      <footer><span>JAIN (Deemed-to-be University), Department of CS & IT</span><span>Use arrow keys to navigate</span></footer>
+    </section>
+
+    <section class="slide">
+      <header><span class="brand"><span class="brand-mark"></span>AeroGuard-EP</span><span>Publication Metadata</span></header>
+      <div class="content two-col">
+        <div class="stack">
+          <div class="kicker">IJSRED publication record</div>
+          <h2>Research is published and traceable.</h2>
+          <p class="lead">The paper appears in the International Journal of Scientific Research and Engineering Development, Volume 9 Issue 1, January-February 2026.</p>
+        </div>
+        <div class="panel stack">
+          <div class="meta-grid">
+            <div class="meta"><span class="label">Paper ID</span><span class="value">IJSRED-V9I1P266</span></div>
+            <div class="meta"><span class="label">Pages</span><span class="value">1942-1946</span></div>
+            <div class="meta"><span class="label">Area</span><span class="value">Computer Science</span></div>
+            <div class="meta"><span class="label">ISSN</span><span class="value">2581-7175</span></div>
+          </div>
+          <div class="source-links">
+            <span>Online edition: <a href="https://www.ijsred.com/jan-feb-2026.html" target="_blank" rel="noreferrer">ijsred.com/jan-feb-2026.html</a></span>
+            <span>Paper details: <a href="https://www.ijsred.com/volume9/issue1/paper-details/IJSRED-V9I1P266.html" target="_blank" rel="noreferrer">IJSRED-V9I1P266 details page</a></span>
+            <span>Published link: <a href="https://www.ijsred.com/volume9-issue1-part27.html" target="_blank" rel="noreferrer">volume9-issue1-part27.html</a></span>
+            <span>Paper PDF: <a href="https://www.ijsred.com/volume9/issue1/IJSRED-V9I1P266.pdf" target="_blank" rel="noreferrer">IJSRED-V9I1P266.pdf</a></span>
+          </div>
+        </div>
+      </div>
+      <footer><span>Authors: Mr. Diwakara Vasuman, Karthik S Gowda, Rohith R, Vipul Mahesh</span><span>02</span></footer>
+    </section>
+
+    <section class="slide">
+      <header><span class="brand"><span class="brand-mark"></span>AeroGuard-EP</span><span>Research Journey</span></header>
+      <div class="content">
+        <div class="stack">
+          <div>
+            <div class="kicker">From research problem to publication</div>
+            <h2>Start to end methodology path</h2>
+          </div>
+          <div class="timeline">
+            <div class="step"><b>Activity 1</b><h3>Problem definition</h3><span>Identified misinformation spread on social media as a high-impact research problem.</span></div>
+            <div class="step"><b>Activity 2</b><h3>Literature review</h3><span>Studied drivers, impacts, user behavior, bots, echo chambers, and mitigation gaps.</span></div>
+            <div class="step"><b>Activity 3</b><h3>Methods and materials</h3><span>Mapped platform data, verification mechanisms, and privacy-preserving AI methods.</span></div>
+            <div class="step"><b>Activity 4</b><h3>Full paper draft</h3><span>Converted the study into a proposed system with architecture, model, metrics, and scope.</span></div>
+            <div class="step"><b>Final</b><h3>Published paper</h3><span>Published as AeroGuard-EP in IJSRED Volume 9 Issue 1, 2026.</span></div>
+          </div>
+        </div>
+      </div>
+      <footer><span>Research Methodology course artifact trail</span><span>03</span></footer>
+    </section>
+
+    <section class="slide">
+      <header><span class="brand"><span class="brand-mark"></span>AeroGuard-EP</span><span>Problem Definition</span></header>
+      <div class="content two-col">
+        <div class="stack">
+          <div class="kicker">Research problem</div>
+          <h2>Misinformation spreads faster than verification.</h2>
+          <p class="lead">Social platforms reward engagement, novelty, and emotional intensity. This lets misleading content travel through large networks before fact-checking systems can react.</p>
+        </div>
+        <div class="panel">
+          <ul>
+            <li>Unverified user-generated content can reach millions within minutes.</li>
+            <li>Algorithmic feeds amplify sensational posts and strong emotional triggers.</li>
+            <li>Echo chambers and confirmation bias make corrections less effective.</li>
+            <li>Existing mitigation is often reactive: labeling, reporting, or deletion after spread.</li>
+          </ul>
+        </div>
+      </div>
+      <footer><span>Original RM theme: drivers, impacts, and mitigation strategies</span><span>04</span></footer>
+    </section>
+
+    <section class="slide">
+      <header><span class="brand"><span class="brand-mark"></span>AeroGuard-EP</span><span>Need for Study</span></header>
+      <div class="content two-col">
+        <div class="network" aria-label="Animated misinformation network visual">
+          <span class="link" style="left:18%;top:28%;width:240px;transform:rotate(20deg)"></span>
+          <span class="link" style="left:38%;top:43%;width:210px;transform:rotate(-25deg)"></span>
+          <span class="link" style="left:30%;top:65%;width:250px;transform:rotate(8deg)"></span>
+          <span class="link" style="left:60%;top:34%;width:190px;transform:rotate(34deg)"></span>
+          <span class="node bad" style="left:17%;top:25%"></span>
+          <span class="node" style="left:40%;top:39%"></span>
+          <span class="node" style="left:28%;top:63%"></span>
+          <span class="node" style="left:59%;top:31%"></span>
+          <span class="node" style="left:75%;top:47%"></span>
+          <span class="node guard" style="left:48%;top:53%"></span>
+        </div>
+        <div class="panel stack">
+          <h2>Impact areas</h2>
+          <ul>
+            <li>Public health: vaccine hesitancy and rejection of evidence-based advice.</li>
+            <li>Politics: distorted voter perception, polarization, and weakened trust.</li>
+            <li>Disaster response: misallocated attention and delayed corrective action.</li>
+            <li>Society: institutional distrust and fragmented information communities.</li>
+          </ul>
+        </div>
+      </div>
+      <footer><span>Motivation: control the cascade before it becomes viral</span><span>05</span></footer>
+    </section>
+
+    <section class="slide">
+      <header><span class="brand"><span class="brand-mark"></span>AeroGuard-EP</span><span>Research Gap</span></header>
+      <div class="content three-col">
+        <div class="panel stack">
+          <div class="kicker">Primary</div>
+          <h3>Regulation</h3>
+          <p class="lead">Policy can define accountability, but platform-level enforcement is slow during high-volatility events.</p>
+        </div>
+        <div class="panel stack">
+          <div class="kicker">Secondary</div>
+          <h3>Media literacy</h3>
+          <p class="lead">Education and prebunking help users resist false claims, but they cannot alone stop rapid cascades.</p>
+        </div>
+        <div class="panel stack">
+          <div class="kicker">Tertiary</div>
+          <h3>Fact-checking</h3>
+          <p class="lead">Reactive labels often arrive after misinformation has already shaped attention and belief.</p>
+        </div>
+      </div>
+      <footer><span>Gap: detection accuracy is not enough without containment velocity</span><span>06</span></footer>
+    </section>
+
+    <section class="slide">
+      <header><span class="brand"><span class="brand-mark"></span>AeroGuard-EP</span><span>Objectives</span></header>
+      <div class="content two-col">
+        <div class="stack">
+          <div class="kicker">Research objectives</div>
+          <h2>Shift from reactive labeling to architectural resilience.</h2>
+        </div>
+        <div class="panel">
+          <ul>
+            <li>Model virality using real-time diffusion dynamics rather than content alone.</li>
+            <li>Use multi-agent consensus to verify suspicious claims with reduced single-model bias.</li>
+            <li>Trigger an algorithmic circuit breaker before an information cascade crosses a stability threshold.</li>
+            <li>Preserve user privacy through federated and decentralized learning concepts.</li>
+          </ul>
+        </div>
+      </div>
+      <footer><span>Core question: how can spread be slowed without simply deleting content?</span><span>07</span></footer>
+    </section>
+
+    <section class="slide">
+      <header><span class="brand"><span class="brand-mark"></span>AeroGuard-EP</span><span>Proposed System</span></header>
+      <div class="content">
+        <div class="stack">
+          <div>
+            <div class="kicker">Four-layer architecture</div>
+            <h2>AeroGuard-EP system design</h2>
+          </div>
+          <div class="architecture">
+            <div class="layer"><span class="layer-number">01</span><h3>Sentinel Layer</h3><p>Decentralized agents monitor content and metadata patterns across social media streams.</p></div>
+            <div class="layer"><span class="layer-number">02</span><h3>Consensus Layer</h3><p>Multiple verifier agents run a reputation-weighted truth assessment process called Sparta Alignment.</p></div>
+            <div class="layer"><span class="layer-number">03</span><h3>Throttling Layer</h3><p>The circuit breaker dynamically reduces transmission velocity for suspicious or false content.</p></div>
+            <div class="layer"><span class="layer-number">04</span><h3>Inoculation Layer</h3><p>Corrective and prebunking information is promoted to reduce continued belief in false claims.</p></div>
+          </div>
+        </div>
+      </div>
+      <footer><span>Methodology focus: detection, verification, containment, correction</span><span>08</span></footer>
+    </section>
+
+    <section class="slide">
+      <header><span class="brand"><span class="brand-mark"></span>AeroGuard-EP</span><span>Mathematical Model</span></header>
+      <div class="content two-col">
+        <div class="stack">
+          <div class="kicker">Stochastic diffusion control</div>
+          <h2>Stiffness ratio becomes the trigger signal.</h2>
+          <p class="lead">The system monitors the rate of change in a misinformation cascade. A high stiffness ratio suggests unstable, fast-moving diffusion.</p>
+        </div>
+        <div class="panel stack">
+          <div class="equation">sigma = |lambda max| / |lambda min|</div>
+          <div class="equation">s = beta * lambda / delta</div>
+          <ul class="small-list">
+            <li>sigma: stiffness ratio of the current spread model.</li>
+            <li>s: functional epidemic threshold.</li>
+            <li>If s &gt; 1 and sigma &gt; sigma crit, the circuit breaker activates.</li>
+          </ul>
+        </div>
+      </div>
+      <footer><span>Key idea: control virality based on network stability</span><span>09</span></footer>
+    </section>
+
+    <section class="slide">
+      <header><span class="brand"><span class="brand-mark"></span>AeroGuard-EP</span><span>Algorithmic Process</span></header>
+      <div class="content">
+        <div class="stack">
+          <div>
+            <div class="kicker">Epistemic circuit breaker</div>
+            <h2>Operational flow</h2>
+          </div>
+          <div class="flow">
+            <div class="flow-card"><strong>1. Input</strong><p>Collect real-time content and metadata streams from cross-platform nodes.</p></div>
+            <div class="flow-card"><strong>2. Estimate</strong><p>Agents compute stiffness and epidemic threshold signals from the diffusion cascade.</p></div>
+            <div class="flow-card"><strong>3. Verify</strong><p>If the threshold is crossed, verifier agents perform consensus with external retrieval.</p></div>
+            <div class="flow-card"><strong>4. Throttle</strong><p>If content is unverified or false, the dispatcher reduces transmission rate and promotes corrections.</p></div>
+          </div>
+        </div>
+      </div>
+      <footer><span>Designed as a browser plugin or platform-level API</span><span>10</span></footer>
+    </section>
+
+    <section class="slide">
+      <header><span class="brand"><span class="brand-mark"></span>AeroGuard-EP</span><span>Data and Evaluation</span></header>
+      <div class="content two-col">
+        <div class="panel stack">
+          <h2>Research materials</h2>
+          <ul>
+            <li>RM activity outputs for problem definition, literature review, methodology, and final draft.</li>
+            <li>Published AeroGuard-EP paper and journal metadata.</li>
+            <li>Benchmark-oriented evaluation using fact-checking and adversarial misinformation datasets.</li>
+          </ul>
+        </div>
+        <div class="panel stack">
+          <h2>Simulation setup</h2>
+          <ul>
+            <li>FIND and AMAFed style federated frameworks for adversarial misinformation detection.</li>
+            <li>Snopes25 benchmark with contemporary fact-checked claims.</li>
+            <li>FaceForensics++ style cross-modal tests for manipulated media conditions.</li>
+          </ul>
+        </div>
+      </div>
+      <footer><span>Evaluation checks both truth verification and containment performance</span><span>11</span></footer>
+    </section>
+
+    <section class="slide">
+      <header><span class="brand"><span class="brand-mark"></span>AeroGuard-EP</span><span>Results</span></header>
+      <div class="content">
+        <div class="stack">
+          <div>
+            <div class="kicker">Reported performance</div>
+            <h2>Outcome highlights</h2>
+          </div>
+          <div class="metrics">
+            <div class="metric"><span class="number">98.76%</span><h3>Detection accuracy</h3><p>Higher than the monolithic LLM baseline reported in the paper.</p></div>
+            <div class="metric"><span class="number">&lt;200ms</span><h3>Verification latency</h3><p>Fast enough for real-time intervention scenarios.</p></div>
+            <div class="metric"><span class="number">46.1%</span><h3>Engagement reduction</h3><p>Stiffness-based throttling reduces misinformation diffusion.</p></div>
+            <div class="metric"><span class="number">-53%</span><h3>Overhead</h3><p>Federated design lowers communication overhead against baseline operation.</p></div>
+          </div>
+        </div>
+      </div>
+      <footer><span>Results taken from the final draft and published paper summary</span><span>12</span></footer>
+    </section>
+
+    <section class="slide">
+      <header><span class="brand"><span class="brand-mark"></span>AeroGuard-EP</span><span>Comparison</span></header>
+      <div class="content two-col">
+        <div class="stack">
+          <div class="kicker">AeroGuard-EP vs baseline</div>
+          <h2>Why the approach is different</h2>
+          <p class="lead">The differentiator is not only deciding whether content is true. The protocol also decides when the network itself is becoming unstable and needs throttling.</p>
+        </div>
+        <div class="panel compare">
+          <div class="bar"><span>Detection accuracy</span><div class="track"><div class="fill" style="width:98.76%"></div></div><strong>98.76%</strong></div>
+          <div class="bar"><span>Baseline accuracy</span><div class="track"><div class="fill" style="width:84.2%"></div></div><strong>84.2%</strong></div>
+          <div class="bar"><span>Engagement reduction</span><div class="track"><div class="fill" style="width:46.1%"></div></div><strong>46.1%</strong></div>
+          <div class="bar"><span>Baseline reduction</span><div class="track"><div class="fill" style="width:15%"></div></div><strong>15%</strong></div>
+        </div>
+      </div>
+      <footer><span>Consensus plus circuit breaking improves containment</span><span>13</span></footer>
+    </section>
+
+    <section class="slide">
+      <header><span class="brand"><span class="brand-mark"></span>AeroGuard-EP</span><span>Applications</span></header>
+      <div class="content three-col">
+        <div class="panel stack"><div class="kicker">Public health</div><h3>Infodemic control</h3><p class="lead">Slow harmful claims about vaccines, treatments, or outbreaks before they dominate public attention.</p></div>
+        <div class="panel stack"><div class="kicker">Election integrity</div><h3>Democratic resilience</h3><p class="lead">Reduce coordinated manipulation while keeping an auditable verification trail.</p></div>
+        <div class="panel stack"><div class="kicker">Disaster response</div><h3>Crisis information</h3><p class="lead">Prioritize accurate warnings and reduce panic-driven false content during emergencies.</p></div>
+      </div>
+      <footer><span>Primary value: speed of truth re-establishment</span><span>14</span></footer>
+    </section>
+
+    <section class="slide">
+      <header><span class="brand"><span class="brand-mark"></span>AeroGuard-EP</span><span>Limitations and Future Scope</span></header>
+      <div class="content two-col">
+        <div class="panel stack">
+          <h2>Limitations</h2>
+          <ul>
+            <li>Real-time Jacobian estimation can be computationally expensive at global scale.</li>
+            <li>Consensus models may still fail if agents converge on persuasive but incorrect evidence.</li>
+            <li>Deployment requires platform cooperation or browser-level adoption.</li>
+          </ul>
+        </div>
+        <div class="panel stack">
+          <h2>Future scope</h2>
+          <ul>
+            <li>Integrate user behavior signals through Intelligence of Social Things research.</li>
+            <li>Use zero-knowledge proofs for privacy-preserving agent reputation.</li>
+            <li>Improve real-time implementation and advanced AI verification models.</li>
+          </ul>
+        </div>
+      </div>
+      <footer><span>Next research direction: privacy-preserving, deployable resilience</span><span>15</span></footer>
+    </section>
+
+    <section class="slide">
+      <header><span class="brand"><span class="brand-mark"></span>AeroGuard-EP</span><span>Conclusion</span></header>
+      <div class="content two-col">
+        <div class="stack">
+          <div class="kicker">Final evaluation close</div>
+          <h2>AeroGuard-EP turns misinformation response into network control.</h2>
+          <p class="lead">The research begins with the social problem of misinformation, develops through literature review and methodology, and ends with a published protocol that combines stochastic modeling, multi-agent verification, privacy-preserving learning, and circuit breaking.</p>
+        </div>
+        <div class="panel stack">
+          <h3>Key takeaway</h3>
+          <ul>
+            <li>Detect suspicious spread early.</li>
+            <li>Verify with multiple AI agents.</li>
+            <li>Throttle unstable cascades.</li>
+            <li>Promote corrective information.</li>
+          </ul>
+        </div>
+      </div>
+      <footer><span>Thank you</span><span>16</span></footer>
+    </section>
+  </main>
+
+  <nav class="controls" aria-label="Slide controls">
+    <button type="button" id="prev" aria-label="Previous slide">&lt;</button>
+    <span class="counter" id="counter">1 / 16</span>
+    <button type="button" id="next" aria-label="Next slide">&gt;</button>
+  </nav>
+  <div class="progress" aria-hidden="true"><span id="progress"></span></div>
+
+  <script>
+    const slides = [...document.querySelectorAll(".slide")];
+    const counter = document.querySelector("#counter");
+    const progress = document.querySelector("#progress");
+    const prev = document.querySelector("#prev");
+    const next = document.querySelector("#next");
+    let index = Number(new URLSearchParams(location.search).get("slide") || 1) - 1;
+
+    function clamp(value) {
+      return Math.max(0, Math.min(slides.length - 1, value));
+    }
+
+    function show(nextIndex, updateUrl = true) {
+      index = clamp(nextIndex);
+      slides.forEach((slide, slideIndex) => slide.classList.toggle("active", slideIndex === index));
+      counter.textContent = `${index + 1} / ${slides.length}`;
+      progress.style.width = `${((index + 1) / slides.length) * 100}%`;
+      prev.disabled = index === 0;
+      next.disabled = index === slides.length - 1;
+      if (updateUrl) {
+        const url = new URL(location.href);
+        url.searchParams.set("slide", String(index + 1));
+        history.replaceState(null, "", url);
+      }
+    }
+
+    prev.addEventListener("click", () => show(index - 1));
+    next.addEventListener("click", () => show(index + 1));
+    document.addEventListener("keydown", (event) => {
+      if (["ArrowRight", "PageDown", " "].includes(event.key)) {
+        event.preventDefault();
+        show(index + 1);
+      }
+      if (["ArrowLeft", "PageUp", "Backspace"].includes(event.key)) {
+        event.preventDefault();
+        show(index - 1);
+      }
+      if (event.key === "Home") show(0);
+      if (event.key === "End") show(slides.length - 1);
+    });
+
+    show(index, false);
+  </script>
+</body>
+</html>
