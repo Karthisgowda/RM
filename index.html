@@ -367,6 +367,16 @@
       gap: 14px;
     }
 
+    .panel .flow,
+    .two-col .metrics {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .panel .flow-card {
+      min-height: 132px;
+      padding: 14px;
+    }
+
     .metric {
       min-height: 174px;
       border-radius: 8px;
@@ -660,19 +670,20 @@
     </section>
 
     <section class="slide">
-      <header><span class="brand"><span class="brand-mark"></span>AeroGuard-EP</span><span>Problem Definition</span></header>
+      <header><span class="brand"><span class="brand-mark"></span>AeroGuard-EP</span><span>Problem and Need</span></header>
       <div class="content two-col">
         <div class="stack">
           <div class="kicker">Research problem</div>
           <h2>Misinformation spreads faster than verification.</h2>
-          <p class="lead">Social platforms reward engagement, novelty, and emotional intensity. This lets misleading content travel through large networks before fact-checking systems can react.</p>
+          <p class="lead">Social platforms reward engagement, novelty, and emotional intensity. Misleading posts can travel through large networks before fact-checking systems react.</p>
         </div>
-        <div class="panel">
+        <div class="panel stack">
+          <h3>Why it matters</h3>
           <ul>
-            <li>Unverified user-generated content can reach millions within minutes.</li>
-            <li>Algorithmic feeds amplify sensational posts and strong emotional triggers.</li>
-            <li>Echo chambers and confirmation bias make corrections less effective.</li>
-            <li>Existing mitigation is often reactive: labeling, reporting, or deletion after spread.</li>
+            <li>Public health: vaccine hesitancy and rejection of evidence-based advice.</li>
+            <li>Politics: distorted voter perception, polarization, and weakened trust.</li>
+            <li>Disaster response: delayed corrective action during emergencies.</li>
+            <li>Society: institutional distrust and fragmented information communities.</li>
           </ul>
         </div>
       </div>
@@ -680,72 +691,29 @@
     </section>
 
     <section class="slide">
-      <header><span class="brand"><span class="brand-mark"></span>AeroGuard-EP</span><span>Need for Study</span></header>
+      <header><span class="brand"><span class="brand-mark"></span>AeroGuard-EP</span><span>Gap and Objectives</span></header>
       <div class="content two-col">
-        <div class="network" aria-label="Animated misinformation network visual">
-          <span class="link" style="left:18%;top:28%;width:240px;transform:rotate(20deg)"></span>
-          <span class="link" style="left:38%;top:43%;width:210px;transform:rotate(-25deg)"></span>
-          <span class="link" style="left:30%;top:65%;width:250px;transform:rotate(8deg)"></span>
-          <span class="link" style="left:60%;top:34%;width:190px;transform:rotate(34deg)"></span>
-          <span class="node bad" style="left:17%;top:25%"></span>
-          <span class="node" style="left:40%;top:39%"></span>
-          <span class="node" style="left:28%;top:63%"></span>
-          <span class="node" style="left:59%;top:31%"></span>
-          <span class="node" style="left:75%;top:47%"></span>
-          <span class="node guard" style="left:48%;top:53%"></span>
+        <div class="panel stack">
+          <div class="kicker">Research gap</div>
+          <h2>Reactive systems arrive too late.</h2>
+          <ul>
+            <li>Regulation is slow during high-volatility events.</li>
+            <li>Media literacy helps, but cannot stop rapid cascades alone.</li>
+            <li>Fact-checking labels often appear after belief and attention have shifted.</li>
+          </ul>
         </div>
         <div class="panel stack">
-          <h2>Impact areas</h2>
+          <div class="kicker">Objectives</div>
+          <h2>Build proactive resilience.</h2>
           <ul>
-            <li>Public health: vaccine hesitancy and rejection of evidence-based advice.</li>
-            <li>Politics: distorted voter perception, polarization, and weakened trust.</li>
-            <li>Disaster response: misallocated attention and delayed corrective action.</li>
-            <li>Society: institutional distrust and fragmented information communities.</li>
+            <li>Model virality using real-time diffusion dynamics.</li>
+            <li>Verify suspicious claims with multi-agent consensus.</li>
+            <li>Activate a circuit breaker before instability becomes viral.</li>
+            <li>Preserve privacy through federated learning concepts.</li>
           </ul>
         </div>
       </div>
-      <footer><span>Motivation: control the cascade before it becomes viral</span><span>05</span></footer>
-    </section>
-
-    <section class="slide">
-      <header><span class="brand"><span class="brand-mark"></span>AeroGuard-EP</span><span>Research Gap</span></header>
-      <div class="content three-col">
-        <div class="panel stack">
-          <div class="kicker">Primary</div>
-          <h3>Regulation</h3>
-          <p class="lead">Policy can define accountability, but platform-level enforcement is slow during high-volatility events.</p>
-        </div>
-        <div class="panel stack">
-          <div class="kicker">Secondary</div>
-          <h3>Media literacy</h3>
-          <p class="lead">Education and prebunking help users resist false claims, but they cannot alone stop rapid cascades.</p>
-        </div>
-        <div class="panel stack">
-          <div class="kicker">Tertiary</div>
-          <h3>Fact-checking</h3>
-          <p class="lead">Reactive labels often arrive after misinformation has already shaped attention and belief.</p>
-        </div>
-      </div>
-      <footer><span>Gap: detection accuracy is not enough without containment velocity</span><span>06</span></footer>
-    </section>
-
-    <section class="slide">
-      <header><span class="brand"><span class="brand-mark"></span>AeroGuard-EP</span><span>Objectives</span></header>
-      <div class="content two-col">
-        <div class="stack">
-          <div class="kicker">Research objectives</div>
-          <h2>Shift from reactive labeling to architectural resilience.</h2>
-        </div>
-        <div class="panel">
-          <ul>
-            <li>Model virality using real-time diffusion dynamics rather than content alone.</li>
-            <li>Use multi-agent consensus to verify suspicious claims with reduced single-model bias.</li>
-            <li>Trigger an algorithmic circuit breaker before an information cascade crosses a stability threshold.</li>
-            <li>Preserve user privacy through federated and decentralized learning concepts.</li>
-          </ul>
-        </div>
-      </div>
-      <footer><span>Core question: how can spread be slowed without simply deleting content?</span><span>07</span></footer>
+      <footer><span>Gap: detection accuracy is not enough without containment velocity</span><span>05</span></footer>
     </section>
 
     <section class="slide">
@@ -764,47 +732,32 @@
           </div>
         </div>
       </div>
-      <footer><span>Methodology focus: detection, verification, containment, correction</span><span>08</span></footer>
+      <footer><span>Methodology focus: detection, verification, containment, correction</span><span>06</span></footer>
     </section>
 
     <section class="slide">
-      <header><span class="brand"><span class="brand-mark"></span>AeroGuard-EP</span><span>Mathematical Model</span></header>
+      <header><span class="brand"><span class="brand-mark"></span>AeroGuard-EP</span><span>Model and Algorithm</span></header>
       <div class="content two-col">
-        <div class="stack">
+        <div class="panel stack">
           <div class="kicker">Stochastic diffusion control</div>
           <h2>Stiffness ratio becomes the trigger signal.</h2>
-          <p class="lead">The system monitors the rate of change in a misinformation cascade. A high stiffness ratio suggests unstable, fast-moving diffusion.</p>
-        </div>
-        <div class="panel stack">
           <div class="equation">sigma = |lambda max| / |lambda min|</div>
           <div class="equation">s = beta * lambda / delta</div>
           <ul class="small-list">
-            <li>sigma: stiffness ratio of the current spread model.</li>
-            <li>s: functional epidemic threshold.</li>
             <li>If s &gt; 1 and sigma &gt; sigma crit, the circuit breaker activates.</li>
           </ul>
         </div>
-      </div>
-      <footer><span>Key idea: control virality based on network stability</span><span>09</span></footer>
-    </section>
-
-    <section class="slide">
-      <header><span class="brand"><span class="brand-mark"></span>AeroGuard-EP</span><span>Algorithmic Process</span></header>
-      <div class="content">
-        <div class="stack">
-          <div>
-            <div class="kicker">Epistemic circuit breaker</div>
-            <h2>Operational flow</h2>
-          </div>
+        <div class="panel stack">
+          <div class="kicker">Operational flow</div>
           <div class="flow">
-            <div class="flow-card"><strong>1. Input</strong><p>Collect real-time content and metadata streams from cross-platform nodes.</p></div>
-            <div class="flow-card"><strong>2. Estimate</strong><p>Agents compute stiffness and epidemic threshold signals from the diffusion cascade.</p></div>
-            <div class="flow-card"><strong>3. Verify</strong><p>If the threshold is crossed, verifier agents perform consensus with external retrieval.</p></div>
-            <div class="flow-card"><strong>4. Throttle</strong><p>If content is unverified or false, the dispatcher reduces transmission rate and promotes corrections.</p></div>
+            <div class="flow-card"><strong>1. Input</strong><p>Collect content and metadata streams.</p></div>
+            <div class="flow-card"><strong>2. Estimate</strong><p>Compute stiffness and epidemic threshold.</p></div>
+            <div class="flow-card"><strong>3. Verify</strong><p>Run consensus with external retrieval.</p></div>
+            <div class="flow-card"><strong>4. Throttle</strong><p>Reduce transmission rate and promote corrections.</p></div>
           </div>
         </div>
       </div>
-      <footer><span>Designed as a browser plugin or platform-level API</span><span>10</span></footer>
+      <footer><span>Designed as a browser plugin or platform-level API</span><span>07</span></footer>
     </section>
 
     <section class="slide">
@@ -827,12 +780,12 @@
           </ul>
         </div>
       </div>
-      <footer><span>Evaluation checks both truth verification and containment performance</span><span>11</span></footer>
+      <footer><span>Evaluation checks both truth verification and containment performance</span><span>08</span></footer>
     </section>
 
     <section class="slide">
-      <header><span class="brand"><span class="brand-mark"></span>AeroGuard-EP</span><span>Results</span></header>
-      <div class="content">
+      <header><span class="brand"><span class="brand-mark"></span>AeroGuard-EP</span><span>Results and Comparison</span></header>
+      <div class="content two-col">
         <div class="stack">
           <div>
             <div class="kicker">Reported performance</div>
@@ -845,86 +798,47 @@
             <div class="metric"><span class="number">-53%</span><h3>Overhead</h3><p>Federated design lowers communication overhead against baseline operation.</p></div>
           </div>
         </div>
-      </div>
-      <footer><span>Results taken from the final draft and published paper summary</span><span>12</span></footer>
-    </section>
-
-    <section class="slide">
-      <header><span class="brand"><span class="brand-mark"></span>AeroGuard-EP</span><span>Comparison</span></header>
-      <div class="content two-col">
-        <div class="stack">
-          <div class="kicker">AeroGuard-EP vs baseline</div>
-          <h2>Why the approach is different</h2>
-          <p class="lead">The differentiator is not only deciding whether content is true. The protocol also decides when the network itself is becoming unstable and needs throttling.</p>
-        </div>
         <div class="panel compare">
+          <h3>AeroGuard-EP vs baseline</h3>
           <div class="bar"><span>Detection accuracy</span><div class="track"><div class="fill" style="width:98.76%"></div></div><strong>98.76%</strong></div>
           <div class="bar"><span>Baseline accuracy</span><div class="track"><div class="fill" style="width:84.2%"></div></div><strong>84.2%</strong></div>
           <div class="bar"><span>Engagement reduction</span><div class="track"><div class="fill" style="width:46.1%"></div></div><strong>46.1%</strong></div>
           <div class="bar"><span>Baseline reduction</span><div class="track"><div class="fill" style="width:15%"></div></div><strong>15%</strong></div>
         </div>
       </div>
-      <footer><span>Consensus plus circuit breaking improves containment</span><span>13</span></footer>
+      <footer><span>Consensus plus circuit breaking improves containment</span><span>09</span></footer>
     </section>
 
     <section class="slide">
-      <header><span class="brand"><span class="brand-mark"></span>AeroGuard-EP</span><span>Applications</span></header>
-      <div class="content three-col">
-        <div class="panel stack"><div class="kicker">Public health</div><h3>Infodemic control</h3><p class="lead">Slow harmful claims about vaccines, treatments, or outbreaks before they dominate public attention.</p></div>
-        <div class="panel stack"><div class="kicker">Election integrity</div><h3>Democratic resilience</h3><p class="lead">Reduce coordinated manipulation while keeping an auditable verification trail.</p></div>
-        <div class="panel stack"><div class="kicker">Disaster response</div><h3>Crisis information</h3><p class="lead">Prioritize accurate warnings and reduce panic-driven false content during emergencies.</p></div>
-      </div>
-      <footer><span>Primary value: speed of truth re-establishment</span><span>14</span></footer>
-    </section>
-
-    <section class="slide">
-      <header><span class="brand"><span class="brand-mark"></span>AeroGuard-EP</span><span>Limitations and Future Scope</span></header>
+      <header><span class="brand"><span class="brand-mark"></span>AeroGuard-EP</span><span>Conclusion and Future Scope</span></header>
       <div class="content two-col">
         <div class="panel stack">
-          <h2>Limitations</h2>
-          <ul>
-            <li>Real-time Jacobian estimation can be computationally expensive at global scale.</li>
-            <li>Consensus models may still fail if agents converge on persuasive but incorrect evidence.</li>
-            <li>Deployment requires platform cooperation or browser-level adoption.</li>
-          </ul>
-        </div>
-        <div class="panel stack">
-          <h2>Future scope</h2>
-          <ul>
-            <li>Integrate user behavior signals through Intelligence of Social Things research.</li>
-            <li>Use zero-knowledge proofs for privacy-preserving agent reputation.</li>
-            <li>Improve real-time implementation and advanced AI verification models.</li>
-          </ul>
-        </div>
-      </div>
-      <footer><span>Next research direction: privacy-preserving, deployable resilience</span><span>15</span></footer>
-    </section>
-
-    <section class="slide">
-      <header><span class="brand"><span class="brand-mark"></span>AeroGuard-EP</span><span>Conclusion</span></header>
-      <div class="content two-col">
-        <div class="stack">
-          <div class="kicker">Final evaluation close</div>
+          <div class="kicker">Conclusion</div>
           <h2>AeroGuard-EP turns misinformation response into network control.</h2>
-          <p class="lead">The research begins with the social problem of misinformation, develops through literature review and methodology, and ends with a published protocol that combines stochastic modeling, multi-agent verification, privacy-preserving learning, and circuit breaking.</p>
-        </div>
-        <div class="panel stack">
-          <h3>Key takeaway</h3>
           <ul>
             <li>Detect suspicious spread early.</li>
             <li>Verify with multiple AI agents.</li>
-            <li>Throttle unstable cascades.</li>
-            <li>Promote corrective information.</li>
+            <li>Throttle unstable cascades and promote corrective information.</li>
+          </ul>
+        </div>
+        <div class="panel stack">
+          <div class="kicker">Limitations and future work</div>
+          <h2>Next research direction</h2>
+          <ul>
+            <li>Optimize real-time Jacobian estimation at global scale.</li>
+            <li>Reduce consensus failure from persuasive but incorrect evidence.</li>
+            <li>Integrate user behavior signals through Intelligence of Social Things research.</li>
+            <li>Use zero-knowledge proofs for privacy-preserving agent reputation.</li>
           </ul>
         </div>
       </div>
-      <footer><span>Thank you</span><span>16</span></footer>
+      <footer><span>Thank you | Published link: www.ijsred.com/volume9-issue1-part27.html</span><span>10</span></footer>
     </section>
   </main>
 
   <nav class="controls" aria-label="Slide controls">
     <button type="button" id="prev" aria-label="Previous slide">&lt;</button>
-    <span class="counter" id="counter">1 / 16</span>
+    <span class="counter" id="counter">1 / 10</span>
     <button type="button" id="next" aria-label="Next slide">&gt;</button>
   </nav>
   <div class="progress" aria-hidden="true"><span id="progress"></span></div>

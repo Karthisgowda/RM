@@ -1,6 +1,6 @@
 # AeroGuard-EP Research Methodology Presentation
 
-This repository contains a self-contained HTML presentation for the final evaluation of:
+This repository contains a self-contained 10-slide HTML presentation for the final evaluation of:
 
 **AeroGuard-EP: An Integrated Stochastic Multi-Agent Protocol for Cross-Platform Information Resilience and Algorithmic Circuit Breaking**
 
